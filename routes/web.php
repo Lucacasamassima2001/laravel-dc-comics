@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Guest\PageController;
+use App\Http\Controllers\Guest\ComicController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [PageController::class, 'home'])->name('home');
+
+// rotte risorsa comic
+// Route::get('/comics', [PageController::class, 'index'])->name('comics.index');
+// Route::get('/comics/{id}', [PageController::class, 'show'])->name('comics.show');
+
+Route::resource('comics', ComicController::class);
