@@ -4,11 +4,11 @@ body {
     background-image: url("../img/picsum16.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    // background-color: rgb(37, 37, 65);
+    background-color: rgb(55, 55, 228);
 }
 
 h1{
-    // color: white;
+    color: white;
     font-size: 3em;
 }
 
@@ -28,3 +28,14 @@ h1{
     color: black;
 }
 
+.paginator{
+    width: 500px;
+    margin: auto;
+    margin-top: 2em;
+}
+
+form{
+    margin-left: 2em;
+    width: 900px;
+    color: white;
+}

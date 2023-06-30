@@ -12,9 +12,7 @@
         <h1 class="text-center py-3">DC Comics:</h1>
     </header>
     <main>
-        <div class="container-big mx-3">
-            @yield('contents')
-        </div>
+        @yield('contents')
     </main>
     <button class="return-home"><a class="home-link" href="/">Home</a></button>
 </body>

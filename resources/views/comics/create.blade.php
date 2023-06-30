@@ -1,8 +1,9 @@
 @extends('layouts.baselayout')
 
 @section('contents')
-<h2 class="py-2">Inserisci un nuovo Comic:</h2>
+
 <form method="POST" action="{{ route('comics.store') }}">
+    <h2 class="py-2">Inserisci un nuovo Comic:</h2>
     @csrf
     <div class="mb-3">
         <label for="title" class="form-label">Title</label>
