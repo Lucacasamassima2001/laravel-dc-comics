@@ -1,6 +1,6 @@
-{{-- @extends('home'); --}}
+@extends('layouts.baselayout')
 
-{{-- @section('contents') --}}
+@section('contents')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,10 +10,10 @@
     <title>DC-comics</title>
 </head>
 <body>
-    <div class="container-big d-flex g-5">
+    <div class="container-big d-flex gap-5 flex-wrap justify-content-center py-3">
         @foreach($comics as $comic)
         <div class="card" style="width: 18rem;">
-            <img style="height: 120px" src="{{$comic->thumb}} " class="card-img-top" alt="{{$comic->title}} ">
+            <img style="height: 250px" src="{{$comic->thumb}} " class="card-img-top" alt="{{$comic->title}} ">
             <div class="card-body">
               <h5 class="card-title">{{$comic->title}}</h5>
               <p class="card-text">{{$comic->series}}</p>
@@ -27,4 +27,4 @@
 </html>
 
 
-{{-- @endsection --}}
+@endsection

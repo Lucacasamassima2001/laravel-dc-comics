@@ -8,6 +8,11 @@
     @vite('resources/js/app.js')
 </head>
 <body>
-    
+    <header>
+        <h1 class="text-center py-3">Comics:</h1>
+    </header>ù
+    <main>
+        @yield('contents')
+    </main>
 </body>
 </html>
