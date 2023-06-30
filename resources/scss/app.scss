@@ -4,13 +4,27 @@ body {
     background-image: url("../img/picsum16.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    background-color: rgb(37, 37, 65);
+    // background-color: rgb(37, 37, 65);
 }
 
 h1{
-    color: white;
+    // color: white;
     font-size: 3em;
 }
 
 
+
+.return-home{
+    height: 30px;
+    border: 2px solid white;
+    border-radius: 20px;
+    position: fixed;
+    right: 10px;
+    bottom: 10px;  
+}
+
+.home-link{
+    text-decoration: none;
+    color: black;
+}
 

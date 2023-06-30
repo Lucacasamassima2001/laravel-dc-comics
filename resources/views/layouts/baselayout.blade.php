@@ -9,10 +9,13 @@
 </head>
 <body>
     <header>
-        <h1 class="text-center py-3">Comics:</h1>
-    </header>ù
+        <h1 class="text-center py-3">DC Comics:</h1>
+    </header>
     <main>
-        @yield('contents')
+        <div class="container-big mx-3">
+            @yield('contents')
+        </div>
     </main>
+    <button class="return-home"><a class="home-link" href="/">Home</a></button>
 </body>
 </html>
