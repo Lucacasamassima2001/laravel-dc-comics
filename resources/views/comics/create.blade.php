@@ -11,7 +11,10 @@
 
     <div class="mb-3">
         <label for="src" class="form-label">Thumb</label>
-        <input type="text" class="form-control" id="thumb" name="thumb">
+        <input type="text" class="form-control" id="thumb" name="thumb" @error('src') is-invalid @enderror>
+        <div class="invalid-feedback">
+            @error('src') {{ $message }} @enderror
+        </div>
     </div>
 
     <div class="mb-3">
