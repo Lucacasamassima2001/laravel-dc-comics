@@ -22,3 +22,5 @@ Route::get('/', [PageController::class, 'home'])->name('home');
 // Route::get('/comics/{id}', [PageController::class, 'show'])->name('comics.show');
 
 Route::resource('comics', ComicController::class);
+
+Route::post('/comics/{comic}/restore', [ComicController::class, 'restore'])->name('comics.restore');

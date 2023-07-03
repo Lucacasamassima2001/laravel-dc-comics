@@ -50,6 +50,7 @@ return new class extends Migration
         //     "Jerry Siegel",
         //     "Paul Levitz"
         // ],
+            $table->softDeletes();
             $table->timestamps();
         });
     }

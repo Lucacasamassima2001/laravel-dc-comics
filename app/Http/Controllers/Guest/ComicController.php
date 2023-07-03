@@ -8,6 +8,16 @@ use App\Http\Controllers\Controller;
 
 class ComicController extends Controller
 {
+    // variabile privata per i controlli che si può usare ovunque.(vedi update) / oppure si possono ricopiare le validations direttamente.
+    private $validations = [
+            'title'           =>      'required|string|max:200',
+            'description'     =>      'required|string',
+            'thumb'           =>      'required|url',
+            'price'           =>      'required|integer|max:50',
+            'series'          =>      'required|string|max:200',
+            'sale_date'       =>      'required|string|max:50',
+            'type'            =>      'required|string|max:200',
+    ];
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +26,7 @@ class ComicController extends Controller
     public function index()
     {
         $comics = Comic::paginate(4);
-        // $comics = Comic::all();
+        // $comics = Comic::all(); - seleziona tutti i dati
         return view('comics.index', compact('comics'));
     }
 
@@ -88,9 +98,9 @@ class ComicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Comic $comic)
     {
-        //
+        return view('comics.edit', compact('comic'));
     }
 
     /**
@@ -100,19 +110,61 @@ class ComicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Comic $comic)
     {
-        //
+        // validare i dati
+        $data = $request->all();
+        $request->validate($this->validations);
+        // aggiornare i dati nel DB
+        $comic->title           = $data['title'];
+        $comic->thumb           = $data['thumb'];
+        $comic->series          = $data['series'];
+        $comic->type            = $data['type'];
+        $comic->price           = $data['price'];
+        $comic->sale_date       = $data['sale_date'];
+        $comic->description     = $data['description'];
+        $comic->update();
+
+        // modo alternativo per reinderizzare l'utente
+        // return redirect()->route('comics.show' , ['comic' => $comic->id]);
+        return to_route('comics.show',['comic' => $comic->id]);
     }
 
     /**
-     * Remove the specified resource from storage.
      *
+     * Remove the specified resource from storage.
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, Comic $comic)
     {
-        //
+        $comic->delete();
+        return to_route('comics.index')->with('delete_success', $comic);
     }
+
+    public function restore($id){
+    
+
+        $comic = Comic::withTrashed()
+                ->where('id', $id)
+                ->restore();
+        $comic = Comic::find($id);
+        return to_route('comics.index')->with('restore_success', $comic);
+
+    }
+
+    
+    // public function harddelete($id){
+    //     $comic = Comic::withTrashed()
+    //     ->where('id', $id);
+    //     $comic->forceDelete();
+    //     return to_route('comics.trashed')->with('delete_success', $comic);
+    // }
+    
+    // public function trash(){
+        //  $trashedcomics = Comic::withTrashed()->paginate(5);
+        //  return view('comics.trashed', compact('comic'));
+
+    // }
 }
+
