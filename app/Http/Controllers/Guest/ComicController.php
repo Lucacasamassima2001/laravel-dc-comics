@@ -153,18 +153,20 @@ class ComicController extends Controller
 
     }
 
-    
-    // public function harddelete($id){
-    //     $comic = Comic::withTrashed()
-    //     ->where('id', $id);
-    //     $comic->forceDelete();
-    //     return to_route('comics.trashed')->with('delete_success', $comic);
-    // }
-    
-    // public function trash(){
-        //  $trashedcomics = Comic::withTrashed()->paginate(5);
-        //  return view('comics.trashed', compact('comic'));
 
-    // }
+    public function trashed(){
+         $trashedcomics = Comic::onlyTrashed()->paginate(5);
+         return view('comics.trashed', compact('trashedcomics'));
+
+    }
+
+
+    public function harddelete($id){
+        $comic = Comic::withTrashed()
+        ->find($id);
+        $comic->forceDelete();
+        return to_route('comics.trashed')->with('delete_success', $comic);
+    }
+
 }
 

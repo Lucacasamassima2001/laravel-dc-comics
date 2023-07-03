@@ -20,7 +20,11 @@ Route::get('/', [PageController::class, 'home'])->name('home');
 // rotte risorsa comic
 // Route::get('/comics', [PageController::class, 'index'])->name('comics.index');
 // Route::get('/comics/{id}', [PageController::class, 'show'])->name('comics.show');
+Route::get('/comics/trashed', [ComicController::class, 'trashed'])->name('comics.trashed');
 
 Route::resource('comics', ComicController::class);
 
 Route::post('/comics/{comic}/restore', [ComicController::class, 'restore'])->name('comics.restore');
+
+Route::delete('/comics/{comic}/harddelete', [ComicController::class, 'harddelete'])->name('comics.harddelete');
+

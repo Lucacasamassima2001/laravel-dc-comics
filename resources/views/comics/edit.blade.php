@@ -2,7 +2,7 @@
 
 @section('contents')
 
-<form method="POST" action="{{ route('comics.update', ['comic' => $comic->id])}}">
+<form style="width: 900px; margin-left:2em;" method="POST" action="{{ route('comics.update', ['comic' => $comic->id])}}">
     <h2 class="py-2">Inserisci un nuovo Comic:</h2>
     @csrf
     @method('PUT') 

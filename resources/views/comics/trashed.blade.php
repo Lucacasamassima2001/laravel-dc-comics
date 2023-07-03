@@ -3,54 +3,46 @@
 @section('contents')
 
 
-    <div class="container">
-        <a href="/comics/create" class="btn btn-primary">Crea nuovo</a>
-        <a href="/comics/trashed" class="btn btn-warning">Cestino</a>
         @if(session('delete_success'))
         @php $comic =session('delete_success')@endphp
-          <div class="alert alert-danger">
-           Il {{$comic->title}} è stato eliminato
-           <form action="{{route("comics.restore", ['comic' => $comic])}}" method="post">
-            @csrf
-           <button class="btn btn-warning">Ripristina</button>
-          </form>
-         </div>
+        <div class="alert alert-danger mx-3">
+        Il {{$comic->title}} è stato eliminato in maniera definitiva
+        </div>
         @endif
-        @if(session('restore_success'))
-        @php $comic =session('restore_success')@endphp
-          <div class="alert alert-success">
-           Il {{$comic->title}} è stato ripristinato
-         </div>
-        @endif
-    </div>
 
       
-    
+      <h1 class="text-center text-danger">Cestino:</h1>
       <div class="container-big d-flex gap-5 flex-wrap justify-content-center py-3">
-          @foreach($comics as $comic)
+          @foreach($trashedcomics as $comic)
           <div class="card" style="width: 18rem;">
               <img style="height: 250px;" src="{{$comic->thumb}} " class="card-img-top" alt="{{$comic->title}} ">
               <div class="card-body">
                 <h5 class="card-title" style="height: 50px">{{$comic->title}}</h5>
                 <p class="card-text" style="height: 30px">{{$comic->series}}</p>
                 <p class="card-text">{{$comic->price}} $</p>
-                <a href="{{route('comics.show', ['comic' => $comic->id])}}" class="btn btn-primary">Mostra</a>
-                <a href="{{route('comics.edit', ['comic' => $comic->id])}}" class="btn btn-warning">Modifica</a>
                 <form 
-                action="{{route('comics.destroy', ['comic' => $comic->id])}}" 
+                action="{{route('comics.restore', ['comic' => $comic->id])}}" 
+                method="post"
+                class="d-inline-block"
+                >
+                  @csrf
+                  <button class="btn btn-warning">Ripristina</button>
+                </form>
+                <form 
+                action="{{route('comics.harddelete', ['comic' => $comic->id])}}" 
                 method="post"
                 class="d-inline-block"
                 >
                   @csrf
                   @method('delete')
-                  <button class="btn btn-danger">Elimina</button>
+                  <button class="btn btn-danger">Elimina definitivamente</button>
                 </form>
               </div>
             </div>
           @endforeach
       </div>
       <div class="paginator">
-        {{ $comics->links('pagination::bootstrap-5') }}
+        {{ $trashedcomics->links('pagination::bootstrap-5') }}
       </div>
 
 
